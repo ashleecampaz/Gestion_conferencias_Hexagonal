@@ -15,8 +15,21 @@ import java.util.List;
  */
 public class ProgramCommitteeMemberService implements IProgramCommitteeMemberQuery,IProgramCommitteMemberRegister {
     
-    IProgramCommitteeMemberPersistence persistence; 
+    private final IProgramCommitteeMemberPersistence persistence; 
+
+    public ProgramCommitteeMemberService(IProgramCommitteeMemberPersistence persistence) {
+        this.persistence = persistence;
+    }
     
+    private boolean IsEmailRegistered(String email){
+      List<String> emails = persistence.findAllEmails();
+      for(String e:emails){
+          if(e.equals(email)){
+              return true; 
+          }
+      }
+      return false; 
+    }
 
     @Override
     public List<ProgramCommitteeMember> findAll() {
@@ -30,7 +43,11 @@ public class ProgramCommitteeMemberService implements IProgramCommitteeMemberQue
 
     @Override
     public ProgramCommitteeMember createProgramCommitteeMember(ProgramCommitteeMember pcm) {
-        return persistence.createProgramCommitteeMember(pcm); 
+        if(!IsEmailRegistered(pcm.getEmail())){
+            ProgramCommitteeMember member = persistence.createProgramCommitteeMember(pcm); 
+            return member; 
+        }
+        return null; 
     }
     
 }

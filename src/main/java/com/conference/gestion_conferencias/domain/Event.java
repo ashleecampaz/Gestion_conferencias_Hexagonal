@@ -22,6 +22,8 @@ public class Event {
         this.programCommitte = programCommitte;
     }
     
+    public Event(){}
+    
     public Long getId() {
         return id;
     }

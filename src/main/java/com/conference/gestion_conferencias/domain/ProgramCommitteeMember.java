@@ -28,7 +28,7 @@ public class ProgramCommitteeMember {
         this.researchField = researchField;
     }
     
-    
+    public ProgramCommitteeMember(){}
     
     public String getName() {
         return name;

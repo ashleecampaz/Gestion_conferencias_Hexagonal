@@ -18,9 +18,15 @@ import java.util.List;
  */
 public class EventService implements IEventQuery, IEventRegister{
 
-    private IEventPersistence persistence; 
-    private IChairQuery chairQuery; 
-    private IProgramCommitteeMemberQuery commiteeMemberQuery; 
+    private final IEventPersistence persistence; 
+    private final IChairQuery chairQuery; 
+    private final IProgramCommitteeMemberQuery commiteeMemberQuery; 
+
+    public EventService(IEventPersistence persistence, IChairQuery chairQuery, IProgramCommitteeMemberQuery commiteeMemberQuery) {
+        this.persistence = persistence;
+        this.chairQuery = chairQuery;
+        this.commiteeMemberQuery = commiteeMemberQuery;
+    }
     
     @Override
     public List<Event> findAll() {
